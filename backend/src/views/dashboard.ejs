@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FIFO Inventory Management Dashboard - Track stock, transactions, and costs in real time.">
+  <title>Dashboard - Inventory Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/css/style.css?v=<%= Date.now() %>">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <h1>Inventory Management <span>FIFO</span></h1>
+    </div>
+    <div class="navbar-user">
+      <span>Welcome, <%= user.username %></span>
+      <a href="/logout" class="btn btn-outline btn-sm">Logout</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="controls-bar">
+      <div id="system-status" class="status-indicator">
+        <span class="status-dot checking"></span> System Status Checking...
+      </div>
+      <div class="action-buttons">
+        <button id="btn-refresh" class="btn btn-secondary">Refresh Data</button>
+        <button id="btn-simulate" class="btn btn-primary">Simulate Events</button>
+      </div>
+    </div>
+
+    <!-- Inventory Overview -->
+    <section class="card">
+      <div class="card-header">
+        <h2>Product Stock Overview</h2>
+      </div>
+      <div class="card-body">
+        <table id="inventory-table" class="data-table">
+          <thead>
+            <tr>
+              <th>Product ID</th>
+              <th>Current Quantity</th>
+              <th>Total Inventory Cost</th>
+              <th>Avg Cost per Unit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="4" class="text-center loading">Loading inventory...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Transaction Ledger -->
+    <section class="card mt-4">
+      <div class="card-header">
+        <h2>Transaction Ledger</h2>
+      </div>
+      <div class="card-body table-responsive">
+        <table id="ledger-table" class="data-table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Product ID</th>
+              <th>Event Type</th>
+              <th>Quantity</th>
+              <th>Unit / FIFO Cost</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="6" class="text-center loading">Loading ledger...</td></tr>
+          </tbody>
+        </table>
+        <div id="ledger-pagination" class="pagination-controls"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Notifications Container -->
+  <div id="notifications-container"></div>
+
+  <script src="/js/dashboard.js?v=<%= Date.now() %>"></script>
+</body>
+</html>
